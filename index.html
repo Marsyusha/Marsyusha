@@ -1,54 +1,174 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Приключение милого существа</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <title>Приключения милого существа</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .hidden { display: none; }
-        .button { padding: 10px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e8f5e9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        #story {
+            margin-bottom: 20px;
+        }
+        button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
-    <div id="game">
-        <h1 id="title">Привет, путник!</h1>
-        <p id="story">Ты просыпаешься в лесу. Куда ты пойдёшь?</p>
-        <button class="button" onclick="choosePath('wind')">На звук ветра</button>
-        <button class="button" onclick="choosePath('water')">К воде</button>
-    </div>
-
-    <div id="puzzle" class="hidden">
-        <h2 id="puzzleTitle"></h2>
-        <p id="puzzleStory"></p>
-        <!-- Здесь будут элементы для головоломок -->
-    </div>
+    <h1>Приключения милого существа</h1>
+    <div id="story"></div>
+    <div id="choices"></div>
 
     <script>
-        let tg = window.Telegram.WebApp;
+        const storyElement = document.getElementById('story');
+        const choicesElement = document.getElementById('choices');
 
-        function choosePath(path) {
-            if (path === 'wind') {
-                document.getElementById('story').innerText = "Ты решил пойти на звук ветра. Перед тобой лабиринт.";
-                document.getElementById('puzzleTitle').innerText = "Лабиринт";
-                document.getElementById('puzzleStory').innerText = "Найди выход, выбрав правильный путь.";
-                document.getElementById('game').classList.add('hidden');
-                document.getElementById('puzzle').classList.remove('hidden');
-                // Здесь можно добавить логику для лабиринта
-            } else {
-                document.getElementById('story').innerText = "Ты решил пойти к воде. Придется построить мост.";
-                document.getElementById('puzzleTitle').innerText = "Переправа";
-                document.getElementById('puzzleStory').innerText = "Собери ветки, чтобы перебраться на другой берег.";
-                document.getElementById('game').classList.add('hidden');
-                document.getElementById('puzzle').classList.remove('hidden');
-                // Здесь можно добавить логику для переправы
+        const storyParts = [
+            {
+                text: "Вы оказались на таинственной планете, окруженной великолепным лесом. Вам нужно найти своих друзей. Что вы хотите сделать?",
+                choices: [
+                    { text: "Пойти вглубь леса", nextPart: 1 },
+                    { text: "Исследовать окрестности", nextPart: 2 }
+                ]
+            },
+            {
+                text: "Вы углубились в лес и встретили говорящего зайца. Он предлагает вам помощь. Как вы поступите?",
+                choices: [
+                    { text: "Принять помощь зайца", nextPart: 3 },
+                    { text: "Отказаться и идти дальше", nextPart: 4 }
+                ]
+            },
+            {
+                text: "Вы нашли небольшую поляну с цветами и ягодами. Вы решаете отдохнуть. Что делать дальше?",
+                choices: [
+                    { text: "Собрать ягоды", nextPart: 5 },
+                    { text: "Продолжить путь", nextPart: 1 }
+                ]
+            },
+            {
+                text: "Заяц становится вашим другом и вместе с вами продолжает поиски. Вы чувствуете себя не одиноким. Вы находите тропинку, ведущую к загадочному храму.",
+                choices: [
+                    { text: "Исследовать храм", nextPart: 6 },
+                    { text: "Вернуться назад", nextPart: 1 }
+                ]
+            },
+            {
+                text: "Вы идете дальше в лес и сталкиваетесь с дремлющим медведем. Как вы поступите?",
+                choices: [
+                    { text: "Аккуратно пройти мимо", nextPart: 7 },
+                    { text: "Разбудить медведя", nextPart: 8 }
+                ]
+            },
+            {
+                text: "Вы собрали много ягод и чувствуете себя прекрасно. Вдруг вы замечаете, как ваши друзья проходят мимо!",
+                choices: [
+                    { text: "Позвать их", nextPart: 9 },
+                    { text: "Скрыться в кустах", nextPart: 10 }
+                ]
+            },
+            {
+                text: "Вы вошли в храм и увидели множество тайн. Вдруг появился дух, предлагающий вам выбор: 'Отправься в прошлое или исследуй будущее'.",
+                choices: [
+                    { text: "Отправиться в прошлое", nextPart: 11 },
+                    { text: "Исследовать будущее", nextPart: 12 }
+                ]
+            },
+            {
+                text: "Вы аккуратно прошли мимо медведя и добираетесь до конца леса. Там вас ждут новые приключения.",
+                choices: [
+                    { text: "Идти дальше", nextPart: 13 }
+                ]
+            },
+            {
+                text: "Вы разбудили медведя, и он сильно рассердился. Но, к счастью, он просто хотел поиграть. Вы стали друзьями и теперь вместе ищете приключения!",
+                choices: [
+                    { text: "Идти к реке", nextPart: 14 }
+                ]
+            },
+            {
+                text: "Вы позвали своих друзей, и они радостно вернулись к вам. Все вместе вы решили исследовать этот удивительный мир.",
+                choices: [
+                    { text: "Отправиться в новое приключение", nextPart: 15 }
+                ]
+            },
+            {
+                text: "Вы решили скрыться в кустах, но ваши друзья вас заметили и подошли. Вместе вы продолжаете приключения.",
+                choices: [
+                    { text: "Идти к горам", nextPart: 16 }
+                ]
+            },
+            {
+                text: "Вы вернулись в прошлое и увидели, как мир был другим. Вы узнали, как спасти своих друзей в настоящем.",
+                choices: [
+                    { text: "Вернуться в настоящее", nextPart: 17 }
+                ]
+            },
+            {
+                text: "Вы исследовали будущее и узнали, что планета будет цветущей и полной жизни. Вам нужно вернуться, чтобы сделать это реальностью.",
+                choices: [
+                    { text: "Вернуться и действовать", nextPart: 18 }
+                ]
+            },
+            {
+                text: "Вы отправились дальше и нашли загадочный водопад. Это начало нового захватывающего приключения.",
+                choices: [
+                    { text: "Идти к водопаду", nextPart: 19 }
+                ]
+            },
+            {
+                text: "Вы решили отправиться к реке и стали свидетелями удивительного шоу света. Это волшебный момент!",
+                choices: [
+                    { text: "Вернуться назад", nextPart: 1 }
+                ]
+            },
+            {
+                text: "Вы и ваши друзья решили покорить горы. Это было незабываемое путешествие.",
+                choices: [
+                    { text: "Продолжать приключения", nextPart: 1 }
+                ]
+            },
+            {
+                text: "Вы вернулись в настоящее и смогли спасти своих друзей. Ваше приключение продолжается с новыми знаниями!",
+                choices: [
+                    { text: "Продолжить приключения", nextPart: 1 }
+                ]
+            },
+            {
+                text: "Вы вернулись и начали действовать. Это привело к новому приключению в другом мире.",
+                choices: [
+                    { text: "Исследовать новый мир", nextPart: 1 }
+                ]
             }
+        ];
+
+        let currentPart = 0;
+
+        function updateStory() {
+            const part = storyParts[currentPart];
+            storyElement.innerText = part.text;
+            choicesElement.innerHTML = '';
+
+            part.choices.forEach(choice => {
+                const button = document.createElement('button');
+                button.innerText = choice.text;
+                button.onclick = () => {
+                    currentPart = choice.nextPart;
+                    updateStory();
+                };
+                choicesElement.appendChild(button);
+            });
         }
 
-        // Инициализация
-        tg.ready();
+        updateStory();
     </script>
 </body>
 </html>
