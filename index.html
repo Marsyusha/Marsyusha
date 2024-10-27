@@ -39,69 +39,83 @@
     <h1>Приключение на Таинственной Планете</h1>
     <div id="gameContainer">
         <p id="storyText">Вы оказались на незнакомой планете, окруженной густым лесом. Вам нужно найти своих друзей. Что вы сделаете?</p>
-        <button class="option-button" onclick="chooseOption('exploreForest')">Исследовать лес</button>
-        <button class="option-button" onclick="chooseOption('waitHere')">Подождать здесь</button>
+        <div id="buttonsContainer">
+            <button class="option-button" data-option="exploreForest">Исследовать лес</button>
+            <button class="option-button" data-option="waitHere">Подождать здесь</button>
+        </div>
     </div>
 
     <script>
+        // Функция обновления текста и кнопок в зависимости от выбора
         function chooseOption(option) {
             const storyText = document.getElementById("storyText");
-            const gameContainer = document.getElementById("gameContainer");
+            const buttonsContainer = document.getElementById("buttonsContainer");
 
             if (option === 'exploreForest') {
                 storyText.textContent = "Вы углубляетесь в лес и вскоре находите странный светящийся камень. Что вы сделаете?";
                 
-                gameContainer.innerHTML = `
-                    <p>Вы углубляетесь в лес и вскоре находите странный светящийся камень. Что вы сделаете?</p>
-                    <button class="option-button" onclick="chooseOption('pickUpStone')">Взять камень</button>
-                    <button class="option-button" onclick="chooseOption('ignoreStone')">Игнорировать камень и идти дальше</button>
+                buttonsContainer.innerHTML = `
+                    <button class="option-button" data-option="pickUpStone">Взять камень</button>
+                    <button class="option-button" data-option="ignoreStone">Игнорировать камень и идти дальше</button>
                 `;
             } else if (option === 'waitHere') {
                 storyText.textContent = "Вы решили остаться на месте. Вскоре вы услышали шорох позади... Что вы сделаете?";
                 
-                gameContainer.innerHTML = `
-                    <p>Вы решили остаться на месте. Вскоре вы услышали шорох позади... Что вы сделаете?</p>
-                    <button class="option-button" onclick="chooseOption('lookBack')">Обернуться</button>
-                    <button class="option-button" onclick="chooseOption('runAway')">Убежать</button>
+                buttonsContainer.innerHTML = `
+                    <button class="option-button" data-option="lookBack">Обернуться</button>
+                    <button class="option-button" data-option="runAway">Убежать</button>
                 `;
             } else if (option === 'pickUpStone') {
                 storyText.textContent = "Камень начинает светиться ярче, и вы чувствуете тепло. Возможно, он поможет вам найти друзей.";
                 
-                gameContainer.innerHTML = `
-                    <p>Камень начинает светиться ярче, и вы чувствуете тепло. Возможно, он поможет вам найти друзей.</p>
-                    <button class="option-button" onclick="chooseOption('continuePath')">Продолжить путь с камнем</button>
+                buttonsContainer.innerHTML = `
+                    <button class="option-button" data-option="continuePath">Продолжить путь с камнем</button>
                 `;
             } else if (option === 'ignoreStone') {
                 storyText.textContent = "Вы прошли мимо камня и вскоре услышали громкий звук впереди. Возможно, там кто-то есть.";
                 
-                gameContainer.innerHTML = `
-                    <p>Вы прошли мимо камня и вскоре услышали громкий звук впереди. Возможно, там кто-то есть.</p>
-                    <button class="option-button" onclick="chooseOption('investigateSound')">Пойти на звук</button>
+                buttonsContainer.innerHTML = `
+                    <button class="option-button" data-option="investigateSound">Пойти на звук</button>
                 `;
             } else if (option === 'lookBack') {
                 storyText.textContent = "Позади вас никого нет, но вы заметили странные следы на земле. Они ведут к пещере.";
                 
-                gameContainer.innerHTML = `
-                    <p>Позади вас никого нет, но вы заметили странные следы на земле. Они ведут к пещере.</p>
-                    <button class="option-button" onclick="chooseOption('enterCave')">Войти в пещеру</button>
-                    <button class="option-button" onclick="chooseOption('followPath')">Следовать за следами</button>
+                buttonsContainer.innerHTML = `
+                    <button class="option-button" data-option="enterCave">Войти в пещеру</button>
+                    <button class="option-button" data-option="followPath">Следовать за следами</button>
                 `;
             } else if (option === 'runAway') {
                 storyText.textContent = "Вы убежали подальше от шороха и наткнулись на странное строение. Оно похоже на дом.";
                 
-                gameContainer.innerHTML = `
-                    <p>Вы убежали подальше от шороха и наткнулись на странное строение. Оно похоже на дом.</p>
-                    <button class="option-button" onclick="chooseOption('enterHouse')">Войти в дом</button>
+                buttonsContainer.innerHTML = `
+                    <button class="option-button" data-option="enterHouse">Войти в дом</button>
                 `;
             } else if (option === 'continuePath') {
                 storyText.textContent = "Вы двигаетесь дальше с камнем в руке. Вдруг камень начинает показывать направление!";
                 
-                gameContainer.innerHTML = `
-                    <p>Вы двигаетесь дальше с камнем в руке. Вдруг камень начинает показывать направление!</p>
-                    <button class="option-button" onclick="chooseOption('followDirection')">Следовать за направлением камня</button>
+                buttonsContainer.innerHTML = `
+                    <button class="option-button" data-option="followDirection">Следовать за направлением камня</button>
                 `;
             }
+            
+            // Переназначаем события для новых кнопок
+            setupButtons();
         }
+
+        // Функция для назначения событий всем кнопкам
+        function setupButtons() {
+            const buttons = document.querySelectorAll(".option-button");
+            buttons.forEach(button => {
+                button.onclick = () => {
+                    const option = button.getAttribute("data-option");
+                    chooseOption(option);
+                };
+            });
+        }
+
+        // Инициализируем кнопки при загрузке
+        setupButtons();
     </script>
 </body>
 </html>
+ 
