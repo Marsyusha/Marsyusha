@@ -1,120 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Приключение на таинственной планете</title>
+    <title>Приключения Марсюши</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #282c34;
-            color: #61dafb;
-            text-align: center;
-            padding: 2rem;
-        }
-        #gameContainer {
-            max-width: 600px;
-            margin: auto;
-            padding: 1rem;
-            border: 2px solid #61dafb;
-            border-radius: 10px;
-            background-color: #20232a;
-        }
-        .option-button {
-            display: block;
-            margin: 1rem auto;
-            padding: 0.5rem 1rem;
-            color: #20232a;
-            background-color: #61dafb;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .option-button:hover {
-            background-color: #4f88c7;
-        }
+        body { font-family: Arial, sans-serif; background-color: #f0f8ff; padding: 20px; }
+        .content { max-width: 600px; margin: auto; text-align: center; }
+        .button { margin: 10px; padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        .button:hover { background-color: #45a049; }
     </style>
 </head>
 <body>
-    <h1>Приключение на Таинственной Планете</h1>
-    <div id="gameContainer">
-        <p id="storyText">Вы оказались на незнакомой планете, окруженной густым лесом. Вам нужно найти своих друзей. Что вы сделаете?</p>
-        <div id="buttonsContainer">
-            <button class="option-button" data-option="exploreForest">Исследовать лес</button>
-            <button class="option-button" data-option="waitHere">Подождать здесь</button>
-        </div>
+    <div class="content" id="content">
+        <h2>Глава 1: Пробуждение</h2>
+        <p>Марсюша приходит в себя на странной планете. Вокруг - таинственный лес, светящиеся растения и шум ветра.</p>
+        <button class="button" onclick="chooseAction('exploreForest')">Исследовать лес</button>
+        <button class="button" onclick="chooseAction('stayHere')">Остаться на месте</button>
     </div>
 
     <script>
-        // Функция обновления текста и кнопок в зависимости от выбора
-        function chooseOption(option) {
-            const storyText = document.getElementById("storyText");
-            const buttonsContainer = document.getElementById("buttonsContainer");
+        function chooseAction(action) {
+            const content = document.getElementById('content');
 
-            if (option === 'exploreForest') {
-                storyText.textContent = "Вы углубляетесь в лес и вскоре находите странный светящийся камень. Что вы сделаете?";
-                
-                buttonsContainer.innerHTML = `
-                    <button class="option-button" data-option="pickUpStone">Взять камень</button>
-                    <button class="option-button" data-option="ignoreStone">Игнорировать камень и идти дальше</button>
+            if (action === 'exploreForest') {
+                content.innerHTML = `
+                    <h2>Глава 2: Глубины леса</h2>
+                    <p>Марсюша отправляется вглубь леса. Чем дальше она идёт, тем сильнее светятся растения вокруг неё.</p>
+                    <button class="button" onclick="chooseAction('followLight')">Следовать за светом</button>
+                    <button class="button" onclick="chooseAction('ignoreLight')">Игнорировать свет и идти дальше</button>
                 `;
-            } else if (option === 'waitHere') {
-                storyText.textContent = "Вы решили остаться на месте. Вскоре вы услышали шорох позади... Что вы сделаете?";
-                
-                buttonsContainer.innerHTML = `
-                    <button class="option-button" data-option="lookBack">Обернуться</button>
-                    <button class="option-button" data-option="runAway">Убежать</button>
+            } else if (action === 'stayHere') {
+                content.innerHTML = `
+                    <h2>Глава 2: Ожидание</h2>
+                    <p>Марсюша решает остаться на месте и слушает звуки леса. Через некоторое время она замечает тень, движущуюся среди деревьев.</p>
+                    <button class="button" onclick="chooseAction('followShadow')">Следовать за тенью</button>
+                    <button class="button" onclick="chooseAction('ignoreShadow')">Остаться на месте</button>
                 `;
-            } else if (option === 'pickUpStone') {
-                storyText.textContent = "Камень начинает светиться ярче, и вы чувствуете тепло. Возможно, он поможет вам найти друзей.";
-                
-                buttonsContainer.innerHTML = `
-                    <button class="option-button" data-option="continuePath">Продолжить путь с камнем</button>
+            } else if (action === 'followLight') {
+                content.innerHTML = `
+                    <h2>Глава 3: Светлый путь</h2>
+                    <p>Марсюша следует за светом и находит древние руины, скрытые глубоко в лесу. Кажется, они хранят какую-то тайну.</p>
+                    <button class="button" onclick="chooseAction('exploreRuins')">Исследовать руины</button>
+                    <button class="button" onclick="chooseAction('leaveRuins')">Покинуть руины и продолжить путь</button>
                 `;
-            } else if (option === 'ignoreStone') {
-                storyText.textContent = "Вы прошли мимо камня и вскоре услышали громкий звук впереди. Возможно, там кто-то есть.";
-                
-                buttonsContainer.innerHTML = `
-                    <button class="option-button" data-option="investigateSound">Пойти на звук</button>
+            } else if (action === 'ignoreLight') {
+                content.innerHTML = `
+                    <h2>Глава 3: Тёмная тропа</h2>
+                    <p>Марсюша игнорирует свет и идёт дальше, погружаясь в темноту леса. Ей начинает казаться, что она потерялась.</p>
+                    <button class="button" onclick="chooseAction('callForHelp')">Позвать на помощь</button>
+                    <button class="button" onclick="chooseAction('keepWalking')">Продолжить идти вперёд</button>
                 `;
-            } else if (option === 'lookBack') {
-                storyText.textContent = "Позади вас никого нет, но вы заметили странные следы на земле. Они ведут к пещере.";
-                
-                buttonsContainer.innerHTML = `
-                    <button class="option-button" data-option="enterCave">Войти в пещеру</button>
-                    <button class="option-button" data-option="followPath">Следовать за следами</button>
+            } else if (action === 'followShadow') {
+                content.innerHTML = `
+                    <h2>Глава 3: Таинственная фигура</h2>
+                    <p>Марсюша следует за тенью и обнаруживает фигуру, скрывающуюся за деревом. Она подходит ближе, чтобы рассмотреть её.</p>
+                    <button class="button" onclick="chooseAction('talkToFigure')">Поговорить с фигурой</button>
+                    <button class="button" onclick="chooseAction('runAway')">Убежать подальше</button>
                 `;
-            } else if (option === 'runAway') {
-                storyText.textContent = "Вы убежали подальше от шороха и наткнулись на странное строение. Оно похоже на дом.";
-                
-                buttonsContainer.innerHTML = `
-                    <button class="option-button" data-option="enterHouse">Войти в дом</button>
+            } else if (action === 'ignoreShadow') {
+                content.innerHTML = `
+                    <h2>Глава 3: Спокойствие леса</h2>
+                    <p>Марсюша решает не следовать за тенью и остаётся на месте. Она закрывает глаза и чувствует, как лес медленно успокаивается вокруг неё.</p>
+                    <button class="button" onclick="chooseAction('meditate')">Помедитировать и почувствовать природу</button>
+                    <button class="button" onclick="chooseAction('leaveForest')">Выйти из леса и продолжить путь</button>
                 `;
-            } else if (option === 'continuePath') {
-                storyText.textContent = "Вы двигаетесь дальше с камнем в руке. Вдруг камень начинает показывать направление!";
-                
-                buttonsContainer.innerHTML = `
-                    <button class="option-button" data-option="followDirection">Следовать за направлением камня</button>
-                `;
+            } else {
+                content.innerHTML = "<p>Произошла ошибка. Пожалуйста, обновите страницу и начните заново.</p>";
             }
-            
-            // Переназначаем события для новых кнопок
-            setupButtons();
         }
-
-        // Функция для назначения событий всем кнопкам
-        function setupButtons() {
-            const buttons = document.querySelectorAll(".option-button");
-            buttons.forEach(button => {
-                button.onclick = () => {
-                    const option = button.getAttribute("data-option");
-                    chooseOption(option);
-                };
-            });
-        }
-
-        // Инициализируем кнопки при загрузке
-        setupButtons();
     </script>
 </body>
 </html>
