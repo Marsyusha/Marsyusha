@@ -1,175 +1,107 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Приключения милого существа</title>
+    <title>Приключение на таинственной планете</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #e8f5e9;
-            background-image: url("monstr.jpg");
-            color: #ff700a;
-            margin: 0;
-            padding: 20px;
+            background-color: #282c34;
+            color: #61dafb;
+            text-align: center;
+            padding: 2rem;
         }
-        #story {
-            margin-bottom: 20px;
+        #gameContainer {
+            max-width: 600px;
+            margin: auto;
+            padding: 1rem;
+            border: 2px solid #61dafb;
+            border-radius: 10px;
+            background-color: #20232a;
         }
-        button {
-            margin: 5px;
-            padding: 10px;
-            font-size: 16px;
+        .option-button {
+            display: block;
+            margin: 1rem auto;
+            padding: 0.5rem 1rem;
+            color: #20232a;
+            background-color: #61dafb;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
+        }
+        .option-button:hover {
+            background-color: #4f88c7;
         }
     </style>
 </head>
 <body>
-    <h1>Приключения милого существа</h1>
-    <div id="story"></div>
-    <div id="choices"></div>
+    <h1>Приключение на Таинственной Планете</h1>
+    <div id="gameContainer">
+        <p id="storyText">Вы оказались на незнакомой планете, окруженной густым лесом. Вам нужно найти своих друзей. Что вы сделаете?</p>
+        <button class="option-button" onclick="chooseOption('exploreForest')">Исследовать лес</button>
+        <button class="option-button" onclick="chooseOption('waitHere')">Подождать здесь</button>
+    </div>
 
     <script>
-        const storyElement = document.getElementById('story');
-        const choicesElement = document.getElementById('choices');
+        function chooseOption(option) {
+            const storyText = document.getElementById("storyText");
+            const gameContainer = document.getElementById("gameContainer");
 
-        const storyParts = [
-            {
-                text: "Вы оказались на таинственной планете, окруженной великолепным лесом. Вам нужно найти своих друзей. Что вы хотите сделать?",
-                choices: [
-                    { text: "Пойти вглубь леса", nextPart: 1 },
-                    { text: "Исследовать окрестности", nextPart: 2 }
-                ]
-            },
-            {
-                text: "Вы углубились в лес и встретили говорящего зайца. Он предлагает вам помощь. Как вы поступите?",
-                choices: [
-                    { text: "Принять помощь зайца", nextPart: 3 },
-                    { text: "Отказаться и идти дальше", nextPart: 4 }
-                ]
-            },
-            {
-                text: "Вы нашли небольшую поляну с цветами и ягодами. Вы решаете отдохнуть. Что делать дальше?",
-                choices: [
-                    { text: "Собрать ягоды", nextPart: 5 },
-                    { text: "Продолжить путь", nextPart: 1 }
-                ]
-            },
-            {
-                text: "Заяц становится вашим другом и вместе с вами продолжает поиски. Вы чувствуете себя не одиноким. Вы находите тропинку, ведущую к загадочному храму.",
-                choices: [
-                    { text: "Исследовать храм", nextPart: 6 },
-                    { text: "Вернуться назад", nextPart: 1 }
-                ]
-            },
-            {
-                text: "Вы идете дальше в лес и сталкиваетесь с дремлющим медведем. Как вы поступите?",
-                choices: [
-                    { text: "Аккуратно пройти мимо", nextPart: 7 },
-                    { text: "Разбудить медведя", nextPart: 8 }
-                ]
-            },
-            {
-                text: "Вы собрали много ягод и чувствуете себя прекрасно. Вдруг вы замечаете, как ваши друзья проходят мимо!",
-                choices: [
-                    { text: "Позвать их", nextPart: 9 },
-                    { text: "Скрыться в кустах", nextPart: 10 }
-                ]
-            },
-            {
-                text: "Вы вошли в храм и увидели множество тайн. Вдруг появился дух, предлагающий вам выбор: 'Отправься в прошлое или исследуй будущее'.",
-                choices: [
-                    { text: "Отправиться в прошлое", nextPart: 11 },
-                    { text: "Исследовать будущее", nextPart: 12 }
-                ]
-            },
-            {
-                text: "Вы аккуратно прошли мимо медведя и добираетесь до конца леса. Там вас ждут новые приключения.",
-                choices: [
-                    { text: "Идти дальше", nextPart: 13 }
-                ]
-            },
-            {
-                text: "Вы разбудили медведя, и он сильно рассердился. Но, к счастью, он просто хотел поиграть. Вы стали друзьями и теперь вместе ищете приключения!",
-                choices: [
-                    { text: "Идти к реке", nextPart: 14 }
-                ]
-            },
-            {
-                text: "Вы позвали своих друзей, и они радостно вернулись к вам. Все вместе вы решили исследовать этот удивительный мир.",
-                choices: [
-                    { text: "Отправиться в новое приключение", nextPart: 15 }
-                ]
-            },
-            {
-                text: "Вы решили скрыться в кустах, но ваши друзья вас заметили и подошли. Вместе вы продолжаете приключения.",
-                choices: [
-                    { text: "Идти к горам", nextPart: 16 }
-                ]
-            },
-            {
-                text: "Вы вернулись в прошлое и увидели, как мир был другим. Вы узнали, как спасти своих друзей в настоящем.",
-                choices: [
-                    { text: "Вернуться в настоящее", nextPart: 17 }
-                ]
-            },
-            {
-                text: "Вы исследовали будущее и узнали, что планета будет цветущей и полной жизни. Вам нужно вернуться, чтобы сделать это реальностью.",
-                choices: [
-                    { text: "Вернуться и действовать", nextPart: 18 }
-                ]
-            },
-            {
-                text: "Вы отправились дальше и нашли загадочный водопад. Это начало нового захватывающего приключения.",
-                choices: [
-                    { text: "Идти к водопаду", nextPart: 19 }
-                ]
-            },
-            {
-                text: "Вы решили отправиться к реке и стали свидетелями удивительного шоу света. Это волшебный момент!",
-                choices: [
-                    { text: "Вернуться назад", nextPart: 1 }
-                ]
-            },
-            {
-                text: "Вы и ваши друзья решили покорить горы. Это было незабываемое путешествие.",
-                choices: [
-                    { text: "Продолжать приключения", nextPart: 1 }
-                ]
-            },
-            {
-                text: "Вы вернулись в настоящее и смогли спасти своих друзей. Ваше приключение продолжается с новыми знаниями!",
-                choices: [
-                    { text: "Продолжить приключения", nextPart: 1 }
-                ]
-            },
-            {
-                text: "Вы вернулись и начали действовать. Это привело к новому приключению в другом мире.",
-                choices: [
-                    { text: "Исследовать новый мир", nextPart: 1 }
-                ]
+            if (option === 'exploreForest') {
+                storyText.textContent = "Вы углубляетесь в лес и вскоре находите странный светящийся камень. Что вы сделаете?";
+                
+                gameContainer.innerHTML = `
+                    <p>Вы углубляетесь в лес и вскоре находите странный светящийся камень. Что вы сделаете?</p>
+                    <button class="option-button" onclick="chooseOption('pickUpStone')">Взять камень</button>
+                    <button class="option-button" onclick="chooseOption('ignoreStone')">Игнорировать камень и идти дальше</button>
+                `;
+            } else if (option === 'waitHere') {
+                storyText.textContent = "Вы решили остаться на месте. Вскоре вы услышали шорох позади... Что вы сделаете?";
+                
+                gameContainer.innerHTML = `
+                    <p>Вы решили остаться на месте. Вскоре вы услышали шорох позади... Что вы сделаете?</p>
+                    <button class="option-button" onclick="chooseOption('lookBack')">Обернуться</button>
+                    <button class="option-button" onclick="chooseOption('runAway')">Убежать</button>
+                `;
+            } else if (option === 'pickUpStone') {
+                storyText.textContent = "Камень начинает светиться ярче, и вы чувствуете тепло. Возможно, он поможет вам найти друзей.";
+                
+                gameContainer.innerHTML = `
+                    <p>Камень начинает светиться ярче, и вы чувствуете тепло. Возможно, он поможет вам найти друзей.</p>
+                    <button class="option-button" onclick="chooseOption('continuePath')">Продолжить путь с камнем</button>
+                `;
+            } else if (option === 'ignoreStone') {
+                storyText.textContent = "Вы прошли мимо камня и вскоре услышали громкий звук впереди. Возможно, там кто-то есть.";
+                
+                gameContainer.innerHTML = `
+                    <p>Вы прошли мимо камня и вскоре услышали громкий звук впереди. Возможно, там кто-то есть.</p>
+                    <button class="option-button" onclick="chooseOption('investigateSound')">Пойти на звук</button>
+                `;
+            } else if (option === 'lookBack') {
+                storyText.textContent = "Позади вас никого нет, но вы заметили странные следы на земле. Они ведут к пещере.";
+                
+                gameContainer.innerHTML = `
+                    <p>Позади вас никого нет, но вы заметили странные следы на земле. Они ведут к пещере.</p>
+                    <button class="option-button" onclick="chooseOption('enterCave')">Войти в пещеру</button>
+                    <button class="option-button" onclick="chooseOption('followPath')">Следовать за следами</button>
+                `;
+            } else if (option === 'runAway') {
+                storyText.textContent = "Вы убежали подальше от шороха и наткнулись на странное строение. Оно похоже на дом.";
+                
+                gameContainer.innerHTML = `
+                    <p>Вы убежали подальше от шороха и наткнулись на странное строение. Оно похоже на дом.</p>
+                    <button class="option-button" onclick="chooseOption('enterHouse')">Войти в дом</button>
+                `;
+            } else if (option === 'continuePath') {
+                storyText.textContent = "Вы двигаетесь дальше с камнем в руке. Вдруг камень начинает показывать направление!";
+                
+                gameContainer.innerHTML = `
+                    <p>Вы двигаетесь дальше с камнем в руке. Вдруг камень начинает показывать направление!</p>
+                    <button class="option-button" onclick="chooseOption('followDirection')">Следовать за направлением камня</button>
+                `;
             }
-        ];
-
-        let currentPart = 0;
-
-        function updateStory() {
-            const part = storyParts[currentPart];
-            storyElement.innerText = part.text;
-            choicesElement.innerHTML = '';
-
-            part.choices.forEach(choice => {
-                const button = document.createElement('button');
-                button.innerText = choice.text;
-                button.onclick = () => {
-                    currentPart = choice.nextPart;
-                    updateStory();
-                };
-                choicesElement.appendChild(button);
-            });
         }
-
-        updateStory();
     </script>
 </body>
 </html>
