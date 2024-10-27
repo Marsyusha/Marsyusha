@@ -20,53 +20,55 @@
 
     <script>
         function chooseAction(action) {
-            const content = document.getElementById('content');
+            setTimeout(() => {
+                const content = document.getElementById('content');
 
-            if (action === 'exploreForest') {
-                content.innerHTML = `
-                    <h2>Глава 2: Глубины леса</h2>
-                    <p>Марсюша отправляется вглубь леса. Чем дальше она идёт, тем сильнее светятся растения вокруг неё.</p>
-                    <button class="button" onclick="chooseAction('followLight')">Следовать за светом</button>
-                    <button class="button" onclick="chooseAction('ignoreLight')">Игнорировать свет и идти дальше</button>
-                `;
-            } else if (action === 'stayHere') {
-                content.innerHTML = `
-                    <h2>Глава 2: Ожидание</h2>
-                    <p>Марсюша решает остаться на месте и слушает звуки леса. Через некоторое время она замечает тень, движущуюся среди деревьев.</p>
-                    <button class="button" onclick="chooseAction('followShadow')">Следовать за тенью</button>
-                    <button class="button" onclick="chooseAction('ignoreShadow')">Остаться на месте</button>
-                `;
-            } else if (action === 'followLight') {
-                content.innerHTML = `
-                    <h2>Глава 3: Светлый путь</h2>
-                    <p>Марсюша следует за светом и находит древние руины, скрытые глубоко в лесу. Кажется, они хранят какую-то тайну.</p>
-                    <button class="button" onclick="chooseAction('exploreRuins')">Исследовать руины</button>
-                    <button class="button" onclick="chooseAction('leaveRuins')">Покинуть руины и продолжить путь</button>
-                `;
-            } else if (action === 'ignoreLight') {
-                content.innerHTML = `
-                    <h2>Глава 3: Тёмная тропа</h2>
-                    <p>Марсюша игнорирует свет и идёт дальше, погружаясь в темноту леса. Ей начинает казаться, что она потерялась.</p>
-                    <button class="button" onclick="chooseAction('callForHelp')">Позвать на помощь</button>
-                    <button class="button" onclick="chooseAction('keepWalking')">Продолжить идти вперёд</button>
-                `;
-            } else if (action === 'followShadow') {
-                content.innerHTML = `
-                    <h2>Глава 3: Таинственная фигура</h2>
-                    <p>Марсюша следует за тенью и обнаруживает фигуру, скрывающуюся за деревом. Она подходит ближе, чтобы рассмотреть её.</p>
-                    <button class="button" onclick="chooseAction('talkToFigure')">Поговорить с фигурой</button>
-                    <button class="button" onclick="chooseAction('runAway')">Убежать подальше</button>
-                `;
-            } else if (action === 'ignoreShadow') {
-                content.innerHTML = `
-                    <h2>Глава 3: Спокойствие леса</h2>
-                    <p>Марсюша решает не следовать за тенью и остаётся на месте. Она закрывает глаза и чувствует, как лес медленно успокаивается вокруг неё.</p>
-                    <button class="button" onclick="chooseAction('meditate')">Помедитировать и почувствовать природу</button>
-                    <button class="button" onclick="chooseAction('leaveForest')">Выйти из леса и продолжить путь</button>
-                `;
-            } else {
-                content.innerHTML = "<p>Произошла ошибка. Пожалуйста, обновите страницу и начните заново.</p>";
-            }
+                if (action === 'exploreForest') {
+                    content.innerHTML = `
+                        <h2>Глава 2: Глубины леса</h2>
+                        <p>Марсюша отправляется вглубь леса. Чем дальше она идёт, тем сильнее светятся растения вокруг неё.</p>
+                        <button class="button" onclick="chooseAction('followLight')">Следовать за светом</button>
+                        <button class="button" onclick="chooseAction('ignoreLight')">Игнорировать свет и идти дальше</button>
+                    `;
+                } else if (action === 'stayHere') {
+                    content.innerHTML = `
+                        <h2>Глава 2: Ожидание</h2>
+                        <p>Марсюша решает остаться на месте и слушает звуки леса. Через некоторое время она замечает тень, движущуюся среди деревьев.</p>
+                        <button class="button" onclick="chooseAction('followShadow')">Следовать за тенью</button>
+                        <button class="button" onclick="chooseAction('ignoreShadow')">Остаться на месте</button>
+                    `;
+                } else if (action === 'followLight') {
+                    content.innerHTML = `
+                        <h2>Глава 3: Светлый путь</h2>
+                        <p>Марсюша следует за светом и находит древние руины, скрытые глубоко в лесу. Кажется, они хранят какую-то тайну.</p>
+                        <button class="button" onclick="chooseAction('exploreRuins')">Исследовать руины</button>
+                        <button class="button" onclick="chooseAction('leaveRuins')">Покинуть руины и продолжить путь</button>
+                    `;
+                } else if (action === 'ignoreLight') {
+                    content.innerHTML = `
+                        <h2>Глава 3: Тёмная тропа</h2>
+                        <p>Марсюша игнорирует свет и идёт дальше, погружаясь в темноту леса. Ей начинает казаться, что она потерялась.</p>
+                        <button class="button" onclick="chooseAction('callForHelp')">Позвать на помощь</button>
+                        <button class="button" onclick="chooseAction('keepWalking')">Продолжить идти вперёд</button>
+                    `;
+                } else if (action === 'followShadow') {
+                    content.innerHTML = `
+                        <h2>Глава 3: Таинственная фигура</h2>
+                        <p>Марсюша следует за тенью и обнаруживает фигуру, скрывающуюся за деревом. Она подходит ближе, чтобы рассмотреть её.</p>
+                        <button class="button" onclick="chooseAction('talkToFigure')">Поговорить с фигурой</button>
+                        <button class="button" onclick="chooseAction('runAway')">Убежать подальше</button>
+                    `;
+                } else if (action === 'ignoreShadow') {
+                    content.innerHTML = `
+                        <h2>Глава 3: Спокойствие леса</h2>
+                        <p>Марсюша решает не следовать за тенью и остаётся на месте. Она закрывает глаза и чувствует, как лес медленно успокаивается вокруг неё.</p>
+                        <button class="button" onclick="chooseAction('meditate')">Помедитировать и почувствовать природу</button>
+                        <button class="button" onclick="chooseAction('leaveForest')">Выйти из леса и продолжить путь</button>
+                    `;
+                } else {
+                    content.innerHTML = "<p>Произошла ошибка. Пожалуйста, обновите страницу и начните заново.</p>";
+                }
+            }, 100); // Задержка на 100 мс
         }
     </script>
 </body>
