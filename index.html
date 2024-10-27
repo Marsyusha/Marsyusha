@@ -13,9 +13,8 @@
 <body>
     <div class="content" id="content">
         <h2>Глава 1: Пробуждение</h2>
-        <p>Марсюша приходит в себя на странной планете. Вокруг - таинственный лес, светящиеся растения и шум ветра.</p>
+        <p>Марсюша открывает глаза и видит над собой незнакомое звёздное небо. Вокруг - тишина, прерываемая лишь шелестом листьев. Она чувствует лёгкий ветерок, который приносит с собой аромат ночного леса.</p>
         <button class="button" onclick="chooseAction('exploreForest')">Исследовать лес</button>
-        <button class="button" onclick="chooseAction('stayHere')">Остаться на месте</button>
     </div>
 
     <script>
@@ -25,73 +24,58 @@
 
                 if (action === 'exploreForest') {
                     content.innerHTML = `
-                        <h2>Глава 2: Глубины леса</h2>
-                        <p>Марсюша отправляется вглубь леса. Чем дальше она идёт, тем сильнее светятся растения вокруг неё.</p>
-                        <button class="button" onclick="chooseAction('followLight')">Следовать за светом</button>
-                        <button class="button" onclick="chooseAction('ignoreLight')">Игнорировать свет и идти дальше</button>
+                        <h2>Глава 2: Встреча с неведомым</h2>
+                        <p>Марсюша углубляется в лес, где растения светятся мягким светом, а с ветвей свисают странные плоды. На мгновение ей кажется, что она не одна. Вдалеке мелькает фигура.</p>
+                        <p>Она решает подойти ближе и видит перед собой невысокое существо с большими глазами. Оно кажется дружелюбным и даже кивает, приветствуя её. Существо жестами предлагает Марсюше следовать за ним.</p>
+                        <button class="button" onclick="chooseAction('followCreature')">Следовать за существом</button>
                     `;
-                } else if (action === 'stayHere') {
+                } else if (action === 'followCreature') {
                     content.innerHTML = `
-                        <h2>Глава 2: Ожидание</h2>
-                        <p>Марсюша решает остаться на месте и слушает звуки леса. Через некоторое время она замечает тень, движущуюся среди деревьев.</p>
-                        <button class="button" onclick="chooseAction('followShadow')">Следовать за тенью</button>
-                        <button class="button" onclick="chooseAction('ignoreShadow')">Остаться на месте</button>
+                        <h2>Глава 3: В пути</h2>
+                        <p>Существо ведёт Марсюшу по извилистой тропинке. Лес становится гуще, и вскоре она замечает, что окружающий свет исходит не только от растений, но и от древних символов, вырезанных на деревьях.</p>
+                        <p>Неожиданно тропинка раздваивается. Существо указывает на правую тропу, но Марсюше кажется, что из левой тропы доносятся тихие звуки, похожие на зов.</p>
+                        <button class="button" onclick="chooseAction('takeRightPath')">Пойти по правой тропе</button>
+                        <button class="button" onclick="chooseAction('takeLeftPath')">Пойти по левой тропе</button>
                     `;
-                } else if (action === 'followLight') {
+                } else if (action === 'takeRightPath') {
                     content.innerHTML = `
-                        <h2>Глава 3: Светлый путь</h2>
-                        <p>Марсюша следует за светом и находит древние руины, скрытые глубоко в лесу. Кажется, они хранят какую-то тайну.</p>
-                        <button class="button" onclick="chooseAction('exploreRuins')">Исследовать руины</button>
-                        <button class="button" onclick="chooseAction('leaveRuins')">Покинуть руины и продолжить путь</button>
+                        <h2>Глава 4: Тайны древнего леса</h2>
+                        <p>Марсюша идёт по правой тропе, следуя за существом. Вскоре они оказываются у водоёма с кристально чистой водой. Существо кивает, предлагая Марсюше заглянуть в воду.</p>
+                        <p>В воде она видит своё отражение, но с необычным сиянием вокруг, как будто оно раскрывает её истинную сущность. Эта встреча даёт ей ощущение силы и решимости идти дальше.</p>
+                        <button class="button" onclick="chooseAction('proceed')">Продолжить путь</button>
                     `;
-                } else if (action === 'ignoreLight') {
+                } else if (action === 'takeLeftPath') {
                     content.innerHTML = `
-                        <h2>Глава 3: Тёмная тропа</h2>
-                        <p>Марсюша игнорирует свет и идёт дальше, погружаясь в темноту леса. Ей начинает казаться, что она потерялась.</p>
-                        <button class="button" onclick="chooseAction('callForHelp')">Позвать на помощь</button>
-                        <button class="button" onclick="chooseAction('keepWalking')">Продолжить идти вперёд</button>
+                        <h2>Глава 4: Лабиринт звуков</h2>
+                        <p>Марсюша идёт по левой тропе, и звуки становятся всё яснее. Это нечто среднее между шёпотом и мелодией, зовущей её к неизвестному. Через некоторое время она оказывается перед древним алтарём.</p>
+                        <p>На алтаре светится камень, и рядом с ним - надпись на непонятном языке. Она чувствует, что это испытание для тех, кто готов раскрыть тайны леса.</p>
+                        <button class="button" onclick="chooseAction('touchStone')">Прикоснуться к камню</button>
                     `;
-                } else if (action === 'followShadow') {
+                } else if (action === 'proceed') {
                     content.innerHTML = `
-                        <h2>Глава 3: Таинственная фигура</h2>
-                        <p>Марсюша следует за тенью и обнаруживает фигуру, скрывающуюся за деревом. Она подходит ближе, чтобы рассмотреть её.</p>
-                        <button class="button" onclick="chooseAction('talkToFigure')">Поговорить с фигурой</button>
-                        <button class="button" onclick="chooseAction('runAway')">Убежать подальше</button>
+                        <h2>Глава 5: Светящийся путь</h2>
+                        <p>Марсюша и её новый друг продолжают путь, и вскоре они оказываются в кругу деревьев, у которых кора светится, как звёзды на небе. Существо объясняет жестами, что здесь они могут найти ответы на вопросы.</p>
+                        <p>Она решает закрыть глаза и погрузиться в медитацию, чувствуя, как энергия леса проникает в её разум.</p>
+                        <button class="button" onclick="chooseAction('meditate')">Помедитировать</button>
                     `;
-                } else if (action === 'ignoreShadow') {
+                } else if (action === 'touchStone') {
                     content.innerHTML = `
-                        <h2>Глава 3: Спокойствие леса</h2>
-                        <p>Марсюша решает не следовать за тенью и остаётся на месте. Она закрывает глаза и чувствует, как лес медленно успокаивается вокруг неё.</p>
-                        <button class="button" onclick="chooseAction('meditate')">Помедитировать и почувствовать природу</button>
-                        <button class="button" onclick="chooseAction('leaveForest')">Выйти из леса и продолжить путь</button>
+                        <h2>Глава 5: Пробуждение магии</h2>
+                        <p>Прикоснувшись к камню, Марсюша ощущает тепло, разливающееся по её рукам. Символы на камне начинают светиться, и перед ней открывается портал, ведущий в неизведанное место.</p>
+                        <p>Это - путь, который требует мужества и веры в себя.</p>
+                        <button class="button" onclick="chooseAction('enterPortal')">Войти в портал</button>
                     `;
-                } else if (action === 'exploreRuins') {
+                } else if (action === 'enterPortal') {
                     content.innerHTML = `
-                        <h2>Глава 4: Тайны руин</h2>
-                        <p>Марсюша изучает древние символы на стенах и вдруг слышит шепот, зовущий её.</p>
-                        <button class="button" onclick="chooseAction('followWhisper')">Следовать за шепотом</button>
-                        <button class="button" onclick="chooseAction('ignoreWhisper')">Игнорировать и изучить дальше</button>
+                        <h2>Конец первой части</h2>
+                        <p>Марсюша вступает в портал, оставляя позади загадочный лес и следуя за новым светом. Впереди её ждут новые открытия и испытания.</p>
+                        <p>Продолжение следует...</p>
                     `;
-                } else if (action === 'leaveRuins') {
+                } else if (action === 'meditate') {
                     content.innerHTML = `
-                        <h2>Глава 4: Продолжение пути</h2>
-                        <p>Марсюша покидает руины и чувствует, что дорога впереди становится всё опаснее.</p>
-                        <button class="button" onclick="chooseAction('proceedCautiously')">Идти осторожно</button>
-                        <button class="button" onclick="chooseAction('runForward')">Бежать вперёд</button>
-                    `;
-                } else if (action === 'callForHelp') {
-                    content.innerHTML = `
-                        <h2>Глава 4: Эхо леса</h2>
-                        <p>Марсюша зовет на помощь, но только эхо отвечает ей. Однако, вскоре на горизонте появляется огонёк.</p>
-                        <button class="button" onclick="chooseAction('approachLight')">Подойти к огоньку</button>
-                        <button class="button" onclick="chooseAction('ignoreLightAndWait')">Остаться на месте и подождать</button>
-                    `;
-                } else if (action === 'keepWalking') {
-                    content.innerHTML = `
-                        <h2>Глава 4: Непроглядная темнота</h2>
-                        <p>Марсюша продолжает идти и вскоре видит свет впереди, словно кто-то идёт навстречу.</p>
-                        <button class="button" onclick="chooseAction('meetStranger')">Подойти к фигуре</button>
-                        <button class="button" onclick="chooseAction('hide')">Спрятаться и наблюдать</button>
+                        <h2>Конец первой части</h2>
+                        <p>Во время медитации Марсюша погружается в особое состояние, позволяющее ей лучше понять этот мир и свою роль в нём. Её ждут великие открытия.</p>
+                        <p>Продолжение следует...</p>
                     `;
                 } else {
                     content.innerHTML = "<p>Произошла ошибка. Пожалуйста, обновите страницу и начните заново.</p>";
