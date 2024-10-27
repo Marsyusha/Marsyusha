@@ -65,6 +65,34 @@
                         <button class="button" onclick="chooseAction('meditate')">Помедитировать и почувствовать природу</button>
                         <button class="button" onclick="chooseAction('leaveForest')">Выйти из леса и продолжить путь</button>
                     `;
+                } else if (action === 'exploreRuins') {
+                    content.innerHTML = `
+                        <h2>Глава 4: Тайны руин</h2>
+                        <p>Марсюша изучает древние символы на стенах и вдруг слышит шепот, зовущий её.</p>
+                        <button class="button" onclick="chooseAction('followWhisper')">Следовать за шепотом</button>
+                        <button class="button" onclick="chooseAction('ignoreWhisper')">Игнорировать и изучить дальше</button>
+                    `;
+                } else if (action === 'leaveRuins') {
+                    content.innerHTML = `
+                        <h2>Глава 4: Продолжение пути</h2>
+                        <p>Марсюша покидает руины и чувствует, что дорога впереди становится всё опаснее.</p>
+                        <button class="button" onclick="chooseAction('proceedCautiously')">Идти осторожно</button>
+                        <button class="button" onclick="chooseAction('runForward')">Бежать вперёд</button>
+                    `;
+                } else if (action === 'callForHelp') {
+                    content.innerHTML = `
+                        <h2>Глава 4: Эхо леса</h2>
+                        <p>Марсюша зовет на помощь, но только эхо отвечает ей. Однако, вскоре на горизонте появляется огонёк.</p>
+                        <button class="button" onclick="chooseAction('approachLight')">Подойти к огоньку</button>
+                        <button class="button" onclick="chooseAction('ignoreLightAndWait')">Остаться на месте и подождать</button>
+                    `;
+                } else if (action === 'keepWalking') {
+                    content.innerHTML = `
+                        <h2>Глава 4: Непроглядная темнота</h2>
+                        <p>Марсюша продолжает идти и вскоре видит свет впереди, словно кто-то идёт навстречу.</p>
+                        <button class="button" onclick="chooseAction('meetStranger')">Подойти к фигуре</button>
+                        <button class="button" onclick="chooseAction('hide')">Спрятаться и наблюдать</button>
+                    `;
                 } else {
                     content.innerHTML = "<p>Произошла ошибка. Пожалуйста, обновите страницу и начните заново.</p>";
                 }
