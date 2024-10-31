@@ -4,13 +4,34 @@
     <meta charset="UTF-8">
     <title>Приключения Марсюши</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f0f8ff; padding: 20px; }
-        .content { max-width: 600px; margin: auto; text-align: center; }
-        .button { margin: 10px; padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        body { 
+            font-family: Arial, sans-serif; 
+            background-color: #f0f8ff; 
+            background-size: cover; 
+            color: white; 
+            padding: 20px;
+            transition: background-image 1s ease;
+        }
+        .content { 
+            max-width: 600px; 
+            margin: auto; 
+            text-align: center; 
+            background-color: rgba(0, 0, 0, 0.6); 
+            padding: 20px; 
+            border-radius: 10px; 
+        }
+        .button { 
+            margin: 10px; 
+            padding: 10px 20px; 
+            background-color: #4CAF50; 
+            color: white; 
+            border: none; 
+            cursor: pointer; 
+        }
         .button:hover { background-color: #45a049; }
     </style>
 </head>
-<body>
+<body id="body">
     <div class="content" id="content">
         <h2>Глава 1: Пробуждение</h2>
         <p>Марсюша открывает глаза и видит над собой незнакомое звёздное небо. Вокруг - тишина, прерываемая лишь шелестом листьев. Она чувствует лёгкий ветерок, который приносит с собой аромат ночного леса.</p>
@@ -18,11 +39,17 @@
     </div>
 
     <script>
+        // Функция для смены фона
+        function setBackground(imageUrl) {
+            document.getElementById('body').style.backgroundImage = `url('${imageUrl}')`;
+        }
+
         function chooseAction(action) {
             setTimeout(() => {
                 const content = document.getElementById('content');
 
                 if (action === 'exploreForest') {
+                    setBackground('forest_night.jpg');  // Лес ночью
                     content.innerHTML = `
                         <h2>Глава 2: Встреча с неведомым</h2>
                         <p>Марсюша углубляется в лес, где растения светятся мягким светом, а с ветвей свисают странные плоды. На мгновение ей кажется, что она не одна. Вдалеке мелькает фигура.</p>
@@ -30,6 +57,7 @@
                         <button class="button" onclick="chooseAction('followCreature')">Следовать за существом</button>
                     `;
                 } else if (action === 'followCreature') {
+                    setBackground('mystic_path.jpg');  // Таинственная тропа
                     content.innerHTML = `
                         <h2>Глава 3: В пути</h2>
                         <p>Существо ведёт Марсюшу по извилистой тропинке. Лес становится гуще, и вскоре она замечает, что окружающий свет исходит не только от растений, но и от древних символов, вырезанных на деревьях.</p>
@@ -38,6 +66,7 @@
                         <button class="button" onclick="chooseAction('takeLeftPath')">Пойти по левой тропе</button>
                     `;
                 } else if (action === 'takeRightPath') {
+                    setBackground('crystal_lake.jpg');  // Озеро с кристаллами
                     content.innerHTML = `
                         <h2>Глава 4: Тайны древнего леса</h2>
                         <p>Марсюша идёт по правой тропе, следуя за существом. Вскоре они оказываются у водоёма с кристально чистой водой. Существо кивает, предлагая Марсюше заглянуть в воду.</p>
@@ -45,6 +74,7 @@
                         <button class="button" onclick="chooseAction('proceed')">Продолжить путь</button>
                     `;
                 } else if (action === 'takeLeftPath') {
+                    setBackground('ancient_altar.jpg');  // Древний алтарь
                     content.innerHTML = `
                         <h2>Глава 4: Лабиринт звуков</h2>
                         <p>Марсюша идёт по левой тропе, и звуки становятся всё яснее. Это нечто среднее между шёпотом и мелодией, зовущей её к неизвестному. Через некоторое время она оказывается перед древним алтарём.</p>
@@ -52,6 +82,7 @@
                         <button class="button" onclick="chooseAction('touchStone')">Прикоснуться к камню</button>
                     `;
                 } else if (action === 'proceed') {
+                    setBackground('star_tree_circle.jpg');  // Круг светящихся деревьев
                     content.innerHTML = `
                         <h2>Глава 5: Светящийся путь</h2>
                         <p>Марсюша и её новый друг продолжают путь, и вскоре они оказываются в кругу деревьев, у которых кора светится, как звёзды на небе. Существо объясняет жестами, что здесь они могут найти ответы на вопросы.</p>
@@ -59,6 +90,7 @@
                         <button class="button" onclick="chooseAction('meditate')">Помедитировать</button>
                     `;
                 } else if (action === 'touchStone') {
+                    setBackground('portal.jpg');  // Портал
                     content.innerHTML = `
                         <h2>Глава 5: Пробуждение магии</h2>
                         <p>Прикоснувшись к камню, Марсюша ощущает тепло, разливающееся по её рукам. Символы на камне начинают светиться, и перед ней открывается портал, ведущий в неизведанное место.</p>
@@ -66,12 +98,14 @@
                         <button class="button" onclick="chooseAction('enterPortal')">Войти в портал</button>
                     `;
                 } else if (action === 'enterPortal') {
+                    setBackground('end.jpg');  // Завершение истории
                     content.innerHTML = `
                         <h2>Конец первой части</h2>
                         <p>Марсюша вступает в портал, оставляя позади загадочный лес и следуя за новым светом. Впереди её ждут новые открытия и испытания.</p>
                         <p>Продолжение следует...</p>
                     `;
                 } else if (action === 'meditate') {
+                    setBackground('end.jpg');  // Завершение истории
                     content.innerHTML = `
                         <h2>Конец первой части</h2>
                         <p>Во время медитации Марсюша погружается в особое состояние, позволяющее ей лучше понять этот мир и свою роль в нём. Её ждут великие открытия.</p>
@@ -85,4 +119,3 @@
     </script>
 </body>
 </html>
- 
